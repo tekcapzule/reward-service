@@ -5,7 +5,7 @@ import com.tekcapsule.core.utils.HeaderUtil;
 import com.tekcapsule.core.utils.Outcome;
 import com.tekcapsule.core.utils.Stage;
 import com.tekcapsule.reward.application.function.input.GetInput;
-import com.tekcapsule.reward.domain.model.Course;
+import com.tekcapsule.reward.domain.model.RewardSummary;
 import com.tekcapsule.reward.domain.service.RewardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
@@ -20,7 +20,7 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GetFunction implements Function<Message<GetInput>, Message<List<Course>>> {
+public class GetFunction implements Function<Message<GetInput>, Message<List<RewardSummary>>> {
 
     private final RewardService rewardService;
 
@@ -33,18 +33,18 @@ public class GetFunction implements Function<Message<GetInput>, Message<List<Cou
 
 
     @Override
-    public Message<List<Course>> apply(Message<GetInput> getInputMessage) {
+    public Message<List<RewardSummary>> apply(Message<GetInput> getInputMessage) {
 
         Map<String, Object> responseHeaders = new HashMap<>();
-        List<Course> courses = new ArrayList<>();
+        List<RewardSummary> cours = new ArrayList<>();
 
         String stage = appConfig.getStage().toUpperCase();
 
         try {
             GetInput getInput = getInputMessage.getPayload();
             log.info(String.format("Entering get course Function -Module Code:%s", getInput.getTopicCode()));
-            courses = rewardService.findAllByTopicCode(getInput.getTopicCode());
-            if (courses.isEmpty()) {
+            cours = rewardService.findAllByTopicCode(getInput.getTopicCode());
+            if (cours.isEmpty()) {
                 responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.NOT_FOUND);
             } else {
                 responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
@@ -53,6 +53,6 @@ public class GetFunction implements Function<Message<GetInput>, Message<List<Cou
             log.error(ex.getMessage());
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.ERROR);
         }
-        return new GenericMessage<>(courses, responseHeaders);
+        return new GenericMessage<>(cours, responseHeaders);
     }
 }

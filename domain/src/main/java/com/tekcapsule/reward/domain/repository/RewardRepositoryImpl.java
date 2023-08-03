@@ -4,7 +4,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
-import com.tekcapsule.reward.domain.model.Course;
+import com.tekcapsule.reward.domain.model.RewardSummary;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,13 +25,13 @@ public class RewardRepositoryImpl implements RewardDynamoRepository {
     }
 
     @Override
-    public List<Course> findAll() {
+    public List<RewardSummary> findAll() {
 
-        return dynamo.scan(Course.class,new DynamoDBScanExpression());
+        return dynamo.scan(RewardSummary.class,new DynamoDBScanExpression());
     }
 
     @Override
-    public List<Course> findAllByTopicCode(String topicCode) {
+    public List<RewardSummary> findAllByTopicCode(String topicCode) {
 
         HashMap<String, AttributeValue> expAttributes = new HashMap<>();
         expAttributes.put(":status", new AttributeValue().withS(ACTIVE_STATUS));
@@ -42,24 +42,24 @@ public class RewardRepositoryImpl implements RewardDynamoRepository {
         expNames.put("#topicCode", "topicCode");
 
 
-        DynamoDBQueryExpression<Course> queryExpression = new DynamoDBQueryExpression<Course>()
+        DynamoDBQueryExpression<RewardSummary> queryExpression = new DynamoDBQueryExpression<RewardSummary>()
                 .withIndexName("topicGSI").withConsistentRead(false)
                 .withKeyConditionExpression("#status = :status and #topicCode = :topicCode")
                 .withExpressionAttributeValues(expAttributes)
                 .withExpressionAttributeNames(expNames);
 
-        return dynamo.query(Course.class, queryExpression);
+        return dynamo.query(RewardSummary.class, queryExpression);
 
     }
 
     @Override
-    public Course findBy(String code) {
-        return dynamo.load(Course.class, code);
+    public RewardSummary findBy(String code) {
+        return dynamo.load(RewardSummary.class, code);
     }
 
     @Override
-    public Course save(Course course) {
-        dynamo.save(course);
-        return course;
+    public RewardSummary save(RewardSummary rewardSummary) {
+        dynamo.save(rewardSummary);
+        return rewardSummary;
     }
 }

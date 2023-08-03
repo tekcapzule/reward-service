@@ -2,9 +2,9 @@ version = 0.1
 [dev]
 [dev.deploy]
 [dev.deploy.parameters]
-stack_name = "dev-reward-service"
+stack_name = "dev-rewardSummary-service"
 s3_bucket = "com.tekcapsule.api.deployment.dev"
-s3_prefix = "dev-reward-service"
+s3_prefix = "dev-rewardSummary-service"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
@@ -14,9 +14,9 @@ image_repositories = []
 [prod]
 [prod.deploy]
 [prod.deploy.parameters]
-stack_name = "prod-reward-service"
+stack_name = "prod-rewardSummary-service"
 s3_bucket = "com.tekcapsule.api.deployment.prod"
-s3_prefix = "prod-reward-service"
+s3_prefix = "prod-rewardSummary-service"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"

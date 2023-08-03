@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tekcapsule</groupId>
-    <artifactId>reward-service</artifactId>
+    <artifactId>rewardSummary-service</artifactId>
     <version>1.0.0</version>
     <name>Reward Service</name>
     <description>Reward Service</description>
@@ -53,7 +53,7 @@
         </dependency>
         <dependency>
             <groupId>com.tekcapsule</groupId>
-            <artifactId>reward-domain</artifactId>
+            <artifactId>rewardSummary-domain</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
@@ -115,9 +115,9 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>reward</id>
+            <id>rewardSummary</id>
             <name>GitHub TekCapsule Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/tekcapsule/reward-service</url>
+            <url>https://maven.pkg.github.com/tekcapsule/rewardSummary-service</url>
         </repository>
     </distributionManagement>
 </project>

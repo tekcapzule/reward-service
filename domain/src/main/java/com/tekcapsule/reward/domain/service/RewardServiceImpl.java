@@ -1,6 +1,6 @@
 package com.tekcapsule.reward.domain.service;
 
-import com.tekcapsule.reward.domain.model.Course;
+import com.tekcapsule.reward.domain.model.RewardSummary;
 import com.tekcapsule.reward.domain.model.Status;
 import com.tekcapsule.reward.domain.repository.RewardDynamoRepository;
 import com.tekcapsule.reward.domain.command.CreateCommand;
@@ -24,9 +24,9 @@ public class RewardServiceImpl implements RewardService {
     @Override
     public void create(CreateCommand createCommand) {
 
-        log.info(String.format("Entering create course service - Module Code :%s", createCommand.getTopicCode()));
+        log.info(String.format("Entering create rewardSummary service - Module Code :%s", createCommand.getTopicCode()));
 
-        Course course = Course.builder()
+        RewardSummary rewardSummary = RewardSummary.builder()
                 .title(createCommand.getTitle())
                 .topicCode(createCommand.getTopicCode())
                 .author(createCommand.getAuthor())
@@ -37,62 +37,62 @@ public class RewardServiceImpl implements RewardService {
                 .description(createCommand.getDescription())
                 .modules(createCommand.getModules())
                 .prizingModel(createCommand.getPrizingModel())
-                .deliveryMode(createCommand.getDeliveryMode())
-                .learningMode(createCommand.getLearningMode())
+                .contributionType(createCommand.getContributionType())
+                .resourceType(createCommand.getResourceType())
                 .imageUrl(createCommand.getImageUrl())
                 .promotion(createCommand.getPromotion())
                 .status(Status.ACTIVE)
                 .recommendations(createCommand.getRecommendations())
                 .build();
 
-        course.setAddedOn(createCommand.getExecOn());
-        course.setAddedBy(createCommand.getExecBy().getUserId());
+        rewardSummary.setAddedOn(createCommand.getExecOn());
+        rewardSummary.setAddedBy(createCommand.getExecBy().getUserId());
 
-        rewardDynamoRepository.save(course);
+        rewardDynamoRepository.save(rewardSummary);
     }
 
     @Override
     public void update(UpdateCommand updateCommand) {
 
-        log.info(String.format("Entering update course service - Course ID:%s", updateCommand.getCourseId()));
+        log.info(String.format("Entering update rewardSummary service - RewardSummary ID:%s", updateCommand.getCourseId()));
 
-        Course course = rewardDynamoRepository.findBy(updateCommand.getCourseId());
-        if (course != null) {
-            course.setTitle(updateCommand.getTitle());
-            course.setTopicCode(updateCommand.getTopicCode());
-            course.setAuthor(updateCommand.getAuthor());
-            course.setPublisher(updateCommand.getPublisher());
-            course.setDuration(updateCommand.getDuration());
-            course.setResourceUrl(updateCommand.getResourceUrl());
-            course.setSummary(updateCommand.getSummary());
-            course.setDescription(updateCommand.getDescription());
-            course.setModules(updateCommand.getModules());
-            course.setPrizingModel(updateCommand.getPrizingModel());
-            course.setDeliveryMode(updateCommand.getDeliveryMode());
-            course.setLearningMode(updateCommand.getLearningMode());
-            course.setPromotion(updateCommand.getPromotion());
-            course.setImageUrl(updateCommand.getImageUrl());
-            course.setUpdatedOn(updateCommand.getExecOn());
-            course.setUpdatedBy(updateCommand.getExecBy().getUserId());
-            course.setRecommendations(updateCommand.getRecommendations());
-            rewardDynamoRepository.save(course);
+        RewardSummary rewardSummary = rewardDynamoRepository.findBy(updateCommand.getCourseId());
+        if (rewardSummary != null) {
+            rewardSummary.setTitle(updateCommand.getTitle());
+            rewardSummary.setTopicCode(updateCommand.getTopicCode());
+            rewardSummary.setAuthor(updateCommand.getAuthor());
+            rewardSummary.setPublisher(updateCommand.getPublisher());
+            rewardSummary.setDuration(updateCommand.getDuration());
+            rewardSummary.setResourceUrl(updateCommand.getResourceUrl());
+            rewardSummary.setSummary(updateCommand.getSummary());
+            rewardSummary.setDescription(updateCommand.getDescription());
+            rewardSummary.setModules(updateCommand.getModules());
+            rewardSummary.setPrizingModel(updateCommand.getPrizingModel());
+            rewardSummary.setContributionType(updateCommand.getContributionType());
+            rewardSummary.setResourceType(updateCommand.getResourceType());
+            rewardSummary.setPromotion(updateCommand.getPromotion());
+            rewardSummary.setImageUrl(updateCommand.getImageUrl());
+            rewardSummary.setUpdatedOn(updateCommand.getExecOn());
+            rewardSummary.setUpdatedBy(updateCommand.getExecBy().getUserId());
+            rewardSummary.setRecommendations(updateCommand.getRecommendations());
+            rewardDynamoRepository.save(rewardSummary);
         }
     }
 
     @Override
     public void recommend(RecommendCommand recommendCommand) {
-        log.info(String.format("Entering recommend course service -  Course Id:%s", recommendCommand.getCourseId()));
+        log.info(String.format("Entering recommend rewardSummary service -  RewardSummary Id:%s", recommendCommand.getCourseId()));
 
-        Course course = rewardDynamoRepository.findBy(recommendCommand.getCourseId());
-        if (course != null) {
-            Integer recommendationsCount = course.getRecommendations();
+        RewardSummary rewardSummary = rewardDynamoRepository.findBy(recommendCommand.getCourseId());
+        if (rewardSummary != null) {
+            Integer recommendationsCount = rewardSummary.getRecommendations();
             recommendationsCount += 1;
-            course.setRecommendations(recommendationsCount);
+            rewardSummary.setRecommendations(recommendationsCount);
 
-            course.setUpdatedOn(recommendCommand.getExecOn());
-            course.setUpdatedBy(recommendCommand.getExecBy().getUserId());
+            rewardSummary.setUpdatedOn(recommendCommand.getExecOn());
+            rewardSummary.setUpdatedBy(recommendCommand.getExecBy().getUserId());
 
-            rewardDynamoRepository.save(course);
+            rewardDynamoRepository.save(rewardSummary);
         }
     }
 
@@ -112,17 +112,17 @@ public class RewardServiceImpl implements RewardService {
     }*/
 
     @Override
-    public List<Course> findAll() {
+    public List<RewardSummary> findAll() {
 
-        log.info("Entering findAll Course service");
+        log.info("Entering findAll RewardSummary service");
 
         return rewardDynamoRepository.findAll();
     }
 
     @Override
-    public List<Course> findAllByTopicCode(String topicCode) {
+    public List<RewardSummary> findAllByTopicCode(String topicCode) {
 
-        log.info(String.format("Entering findAllByTopicCode Course service - Module code:%s", topicCode));
+        log.info(String.format("Entering findAllByTopicCode RewardSummary service - Module code:%s", topicCode));
 
         return rewardDynamoRepository.findAllByTopicCode(topicCode);
     }

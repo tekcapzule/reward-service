@@ -5,7 +5,7 @@ import com.tekcapsule.core.domain.EmptyFunctionInput;
 import com.tekcapsule.core.utils.HeaderUtil;
 import com.tekcapsule.core.utils.Outcome;
 import com.tekcapsule.core.utils.Stage;
-import com.tekcapsule.reward.domain.model.Course;
+import com.tekcapsule.reward.domain.model.RewardSummary;
 import com.tekcapsule.reward.domain.service.RewardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
@@ -17,7 +17,7 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GetAllFunction implements Function<Message<EmptyFunctionInput>, Message<List<Course>>> {
+public class GetAllFunction implements Function<Message<EmptyFunctionInput>, Message<List<RewardSummary>>> {
 
     private final RewardService rewardService;
 
@@ -30,19 +30,19 @@ public class GetAllFunction implements Function<Message<EmptyFunctionInput>, Mes
 
 
     @Override
-    public Message<List<Course>> apply(Message<EmptyFunctionInput> getAllInputMessage) {
+    public Message<List<RewardSummary>> apply(Message<EmptyFunctionInput> getAllInputMessage) {
 
         Map<String, Object> responseHeaders = new HashMap<>();
-        List<Course> courses = new ArrayList<>();
+        List<RewardSummary> cours = new ArrayList<>();
         String stage = appConfig.getStage().toUpperCase();
         try {
-            log.info("Entering get all courses Function");
-            courses = rewardService.findAll();
+            log.info("Entering get all cours Function");
+            cours = rewardService.findAll();
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
         } catch (Exception ex) {
             log.error(ex.getMessage());
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.ERROR);
         }
-        return new GenericMessage<>(courses, responseHeaders);
+        return new GenericMessage<>(cours, responseHeaders);
     }
 }

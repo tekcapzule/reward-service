@@ -5,10 +5,13 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum Status {
+    SUBMITTED("Submitted"),
+    APPROVED("Approved"),
+    REJECTED("Rejected"),
+    CLAIMED("Claimed"),
     ACTIVE("Active"),
     INACTIVE("Inactive"),
-    EXPIRED("Expired"),
-    SUBMITTED("Submitted");
+    EXPIRED("Expired");
 
     @Getter
     private String value;

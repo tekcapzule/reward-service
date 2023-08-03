@@ -1,12 +1,12 @@
 <!-- PROJECT SHIELDS -->
 <a name="readme-top"></a>
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Main Branch](https://github.com/tekcapsule/reward-service/actions/workflows/cicd.yml/badge.svg)](https://github.com/tekcapsule/reward-service/actions/workflows/cicd.yml) 
+[![Main Branch](https://github.com/tekcapsule/rewardSummary-service/actions/workflows/cicd.yml/badge.svg)](https://github.com/tekcapsule/rewardSummary-service/actions/workflows/cicd.yml) 
 [![SonarCloud Bugs](https://sonarcloud.io/api/project_badges/measure?project=tekcapsule_reward-service&metric=bugs)](https://sonarcloud.io/project/overview?id=tekcapsule_reward-service)
 [![SonarCloud Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=tekcapsule_reward-service&metric=vulnerabilities)](https://sonarcloud.io/project/overview?id=tekcapsule_reward-service)
 [![SonarCloud Code Smell](https://sonarcloud.io/api/project_badges/measure?project=tekcapsule_reward-service&metric=code_smells)](https://sonarcloud.io/project/overview?id=tekcapsule_reward-service)
 [![SonarCloud Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=tekcapsule_reward-service&metric=ncloc)](https://sonarcloud.io/project/overview?id=tekcapsule_reward-service)
-[![Github all releases](https://img.shields.io/github/downloads/tekcapsule/reward-service/total.svg)](https://GitHub.com/tekcapsule/reward-service/releases/)
+[![Github all releases](https://img.shields.io/github/downloads/tekcapsule/rewardSummary-service/total.svg)](https://GitHub.com/tekcapsule/rewardSummary-service/releases/)
 
 
 <!-- PROJECT LOGO -->
@@ -18,8 +18,8 @@
     A set of lambda functions to manage rewards in TekCapsule
     <br />
     <a href="https://www.tekcapsule.com/">View Demo</a> |
-    <a href="https://github.com/tekcapsule/reward-service/issues">Report Bug</a> |
-    <a href="https://github.com/tekcapsule/reward-service/issues">Request Feature</a>
+    <a href="https://github.com/tekcapsule/rewardSummary-service/issues">Report Bug</a> |
+    <a href="https://github.com/tekcapsule/rewardSummary-service/issues">Request Feature</a>
   </p>
 </div>
 <div align="center">
@@ -57,7 +57,7 @@
 
 This project contains set of functions written in Java 11 to create, update, query and manage TekCapsule rewards. It is a multi-module maven project with two modules named application & domain. Application module is a springboot application that exposes these functions and domain module contains the domain logic.
 
-![reward-service](https://user-images.githubusercontent.com/9839481/209629447-76ae3d14-752a-4b6f-b00c-85028fdb2095.png)
+![rewardSummary-service](https://user-images.githubusercontent.com/9839481/209629447-76ae3d14-752a-4b6f-b00c-85028fdb2095.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -89,7 +89,7 @@ Please follow the step by step instructions to install the required softwares an
 1. Get the AWS Access Key details
 2. Clone the repo
    ```sh
-   git clone https://github.com/tekcapsule/reward-service.git
+   git clone https://github.com/tekcapsule/rewardSummary-service.git
    ```
 3. Install SAM CLI by following instructions https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html
 4. Configure the following Environment variables
@@ -115,7 +115,7 @@ Note: SERVER_USERNAME and SERVER_PASSWORD details will be be provided by the mai
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/tekcapsule/reward-service/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/tekcapsule/rewardSummary-service/issues) for a list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -134,7 +134,7 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 ## Contributors
-<img src= "https://contrib.rocks/image?repo=tekcapsule/reward-service">
+<img src= "https://contrib.rocks/image?repo=tekcapsule/rewardSummary-service">
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

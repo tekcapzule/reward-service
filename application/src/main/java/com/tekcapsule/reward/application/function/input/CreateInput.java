@@ -2,7 +2,6 @@ package com.tekcapsule.reward.application.function.input;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tekcapsule.reward.domain.model.*;
-import com.tekcapsule.reward.domain.model.Module;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,8 +21,8 @@ public class CreateInput {
     private String description;
     private List<Module> modules;
     private PrizingModel prizingModel;
-    private DeliveryMode deliveryMode;
-    private LearningMode learningMode;
+    private ContributionType contributionType;
+    private ResourceType resourceType;
     private String imageUrl;
 
     private int recommendations;

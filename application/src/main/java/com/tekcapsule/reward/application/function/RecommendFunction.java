@@ -41,7 +41,7 @@ public class RecommendFunction implements Function<Message<RecommendInput>, Mess
         String stage = appConfig.getStage().toUpperCase();
         try {
             RecommendInput recommendInput = recommendInputMessage.getPayload();
-            log.info(String.format("Entering recommend course Function -  Course Id:%s", recommendInput.getCourseId()));
+            log.info(String.format("Entering recommend course Function -  RewardSummary Id:%s", recommendInput.getCourseId()));
             Origin origin = HeaderUtil.buildOriginFromHeaders(recommendInputMessage.getHeaders());
             RecommendCommand recommendCommand = InputOutputMapper.buildRecommendCommandFromRecommendInput.apply(recommendInput, origin);
             rewardService.recommend(recommendCommand);

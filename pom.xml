@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tekcapsule</groupId>
-    <artifactId>reward-application</artifactId>
+    <artifactId>rewardSummary-application</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>Reward Application</name>
@@ -29,9 +29,9 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>reward</id>
+            <id>rewardSummary</id>
             <name>GitHub TekCapsule Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/tekcapsule/reward-service</url>
+            <url>https://maven.pkg.github.com/tekcapsule/rewardSummary-service</url>
         </repository>
     </distributionManagement>
 </project>

@@ -3,7 +3,6 @@ package com.tekcapsule.reward.domain.command;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tekcapsule.core.domain.Command;
 import com.tekcapsule.reward.domain.model.*;
-import com.tekcapsule.reward.domain.model.Module;
 import lombok.Builder;
 import lombok.Data;
 
@@ -24,8 +23,8 @@ public class UpdateCommand extends Command {
     private String description;
     private List<Module> modules;
     private PrizingModel prizingModel;
-    private DeliveryMode deliveryMode;
-    private LearningMode learningMode;
+    private ContributionType contributionType;
+    private ResourceType resourceType;
     private String imageUrl;
 
     private int recommendations;

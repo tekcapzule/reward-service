@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public enum PrizingModel {
-    FREE("Free"),
-    PAID("Paid"),
-    FREEMIUM("Freemium");
+public enum ContributionType {
+    CODE("Code Contribution"),
+    CONTENT("Content Preparation"),
+    EVENT("Community Event Contribution");
 
     @Getter
     private String value;

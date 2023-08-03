@@ -1,11 +1,11 @@
 package com.tekcapsule.reward.domain.repository;
 
-import com.tekcapsule.reward.domain.model.Course;
+import com.tekcapsule.reward.domain.model.RewardSummary;
 import com.tekcapsule.core.domain.CrudRepository;
 
 import java.util.List;
 
-public interface RewardDynamoRepository extends CrudRepository<Course, String> {
+public interface RewardDynamoRepository extends CrudRepository<RewardSummary, String> {
 
-    List<Course> findAllByTopicCode(String topicCode);
+    List<RewardSummary> findAllByTopicCode(String topicCode);
 }

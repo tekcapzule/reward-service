@@ -18,8 +18,8 @@
                     </snapshots>
                 </repository>
                 <repository>
-                    <id>reward</id>
-                    <url>https://maven.pkg.github.com/tekcapsule/reward-service</url>
+                    <id>rewardSummary</id>
+                    <url>https://maven.pkg.github.com/tekcapsule/rewardSummary-service</url>
                     <snapshots>
                         <enabled>true</enabled>
                     </snapshots>
@@ -34,7 +34,7 @@
 
     <servers>
         <server>
-            <id>reward</id>
+            <id>rewardSummary</id>
             <username>${env.SERVER_USERNAME}</username>
             <password>${env.SERVER_PASSWORD}</password>
         </server>
