@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.tekcapsule</groupId>
-    <artifactId>course-application</artifactId>
-    <version>1.0.3</version>
+    <artifactId>reward-application</artifactId>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>Course Application</name>
-    <description>Course Application</description>
+    <name>Reward Application</name>
+    <description>Reward Application</description>
     <properties>
         <sonar.organization>tekcapsule</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -29,9 +29,9 @@
     </build>
     <distributionManagement>
         <repository>
-            <id>course</id>
+            <id>reward</id>
             <name>GitHub TekCapsule Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/tekcapsule/course-service</url>
+            <url>https://maven.pkg.github.com/tekcapsule/reward-service</url>
         </repository>
     </distributionManagement>
 </project>
