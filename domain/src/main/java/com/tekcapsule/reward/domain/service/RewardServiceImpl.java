@@ -2,10 +2,10 @@ package com.tekcapsule.reward.domain.service;
 
 import com.tekcapsule.reward.domain.model.RewardSummary;
 import com.tekcapsule.reward.domain.model.Status;
-import com.tekcapsule.reward.domain.repository.RewardDynamoRepository;
-import com.tekcapsule.reward.domain.command.CreateCommand;
-import com.tekcapsule.reward.domain.command.RecommendCommand;
-import com.tekcapsule.reward.domain.command.UpdateCommand;
+import com.tekcapsule.reward.domain.repository.RewardRepository;
+import com.tekcapsule.reward.domain.command.CreateContributionCommand;
+import com.tekcapsule.reward.domain.command.ClaimRewardsCommand;
+import com.tekcapsule.reward.domain.command.UpdateContributionCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,85 +14,84 @@ import java.util.List;
 @Slf4j
 @Service
 public class RewardServiceImpl implements RewardService {
-    private RewardDynamoRepository rewardDynamoRepository;
+    private RewardRepository rewardRepository;
 
     @Autowired
-    public RewardServiceImpl(RewardDynamoRepository rewardDynamoRepository) {
-        this.rewardDynamoRepository = rewardDynamoRepository;
+    public RewardServiceImpl(RewardRepository rewardRepository) {
+        this.rewardRepository = rewardRepository;
     }
 
     @Override
-    public void create(CreateCommand createCommand) {
+    public void create(CreateContributionCommand createContributionCommand) {
 
-        log.info(String.format("Entering create rewardSummary service - Module Code :%s", createCommand.getTopicCode()));
-
+        log.info(String.format("Entering create rewardSummary service - Module Code :%s", createContributionCommand.getTopicCode()));
         RewardSummary rewardSummary = RewardSummary.builder()
-                .title(createCommand.getTitle())
-                .topicCode(createCommand.getTopicCode())
-                .author(createCommand.getAuthor())
-                .publisher(createCommand.getPublisher())
-                .duration(createCommand.getDuration())
-                .resourceUrl(createCommand.getResourceUrl())
-                .summary(createCommand.getSummary())
-                .description(createCommand.getDescription())
-                .modules(createCommand.getModules())
-                .prizingModel(createCommand.getPrizingModel())
-                .contributionType(createCommand.getContributionType())
-                .resourceType(createCommand.getResourceType())
-                .imageUrl(createCommand.getImageUrl())
-                .promotion(createCommand.getPromotion())
+                .title(createContributionCommand.getTitle())
+                .topicCode(createContributionCommand.getTopicCode())
+                .author(createContributionCommand.getAuthor())
+                .publisher(createContributionCommand.getPublisher())
+                .duration(createContributionCommand.getDuration())
+                .resourceUrl(createContributionCommand.getResourceUrl())
+                .summary(createContributionCommand.getSummary())
+                .description(createContributionCommand.getDescription())
+                .modules(createContributionCommand.getModules())
+                .prizingModel(createContributionCommand.getPrizingModel())
+                .contributionType(createContributionCommand.getContributionType())
+                .resourceType(createContributionCommand.getResourceType())
+                .imageUrl(createContributionCommand.getImageUrl())
+                .promotion(createContributionCommand.getPromotion())
                 .status(Status.ACTIVE)
-                .recommendations(createCommand.getRecommendations())
+                .recommendations(createContributionCommand.getRecommendations())
                 .build();
 
-        rewardSummary.setAddedOn(createCommand.getExecOn());
-        rewardSummary.setAddedBy(createCommand.getExecBy().getUserId());
+        rewardSummary.setAddedOn(createContributionCommand.getExecOn());
+        rewardSummary.setAddedBy(createContributionCommand.getExecBy().getUserId());
 
-        rewardDynamoRepository.save(rewardSummary);
+        rewardRepository.save(rewardSummary);
     }
 
     @Override
-    public void update(UpdateCommand updateCommand) {
+    public void update(UpdateContributionCommand updateContributionCommand) {
 
-        log.info(String.format("Entering update rewardSummary service - RewardSummary ID:%s", updateCommand.getCourseId()));
+        log.info(String.format("Entering update rewardSummary service - RewardSummary ID:%s", updateContributionCommand.getCourseId()));
 
-        RewardSummary rewardSummary = rewardDynamoRepository.findBy(updateCommand.getCourseId());
+        RewardSummary rewardSummary = rewardRepository.findBy(updateContributionCommand.getCourseId());
         if (rewardSummary != null) {
-            rewardSummary.setTitle(updateCommand.getTitle());
-            rewardSummary.setTopicCode(updateCommand.getTopicCode());
-            rewardSummary.setAuthor(updateCommand.getAuthor());
-            rewardSummary.setPublisher(updateCommand.getPublisher());
-            rewardSummary.setDuration(updateCommand.getDuration());
-            rewardSummary.setResourceUrl(updateCommand.getResourceUrl());
-            rewardSummary.setSummary(updateCommand.getSummary());
-            rewardSummary.setDescription(updateCommand.getDescription());
-            rewardSummary.setModules(updateCommand.getModules());
-            rewardSummary.setPrizingModel(updateCommand.getPrizingModel());
-            rewardSummary.setContributionType(updateCommand.getContributionType());
-            rewardSummary.setResourceType(updateCommand.getResourceType());
-            rewardSummary.setPromotion(updateCommand.getPromotion());
-            rewardSummary.setImageUrl(updateCommand.getImageUrl());
-            rewardSummary.setUpdatedOn(updateCommand.getExecOn());
-            rewardSummary.setUpdatedBy(updateCommand.getExecBy().getUserId());
-            rewardSummary.setRecommendations(updateCommand.getRecommendations());
-            rewardDynamoRepository.save(rewardSummary);
+            rewardSummary.setTitle(updateContributionCommand.getTitle());
+            rewardSummary.setTopicCode(updateContributionCommand.getTopicCode());
+            rewardSummary.setAuthor(updateContributionCommand.getAuthor());
+            rewardSummary.setPublisher(updateContributionCommand.getPublisher());
+            rewardSummary.setDuration(updateContributionCommand.getDuration());
+            rewardSummary.setResourceUrl(updateContributionCommand.getResourceUrl());
+            rewardSummary.setSummary(updateContributionCommand.getSummary());
+            rewardSummary.setDescription(updateContributionCommand.getDescription());
+            rewardSummary.setModules(updateContributionCommand.getModules());
+            rewardSummary.setPrizingModel(updateContributionCommand.getPrizingModel());
+            rewardSummary.setContributionType(updateContributionCommand.getContributionType());
+            rewardSummary.setResourceType(updateContributionCommand.getResourceType());
+            rewardSummary.setPromotion(updateContributionCommand.getPromotion());
+            rewardSummary.setImageUrl(updateContributionCommand.getImageUrl());
+            rewardSummary.setUpdatedOn(updateContributionCommand.getExecOn());
+            rewardSummary.setUpdatedBy(updateContributionCommand.getExecBy().getUserId());
+            rewardSummary.setRecommendations(updateContributionCommand.getRecommendations());
+            rewardRepository.save(rewardSummary);
         }
     }
 
     @Override
-    public void recommend(RecommendCommand recommendCommand) {
-        log.info(String.format("Entering recommend rewardSummary service -  RewardSummary Id:%s", recommendCommand.getCourseId()));
+    public void recommend(ClaimRewardsCommand claimRewardsCommand) {
+        log.info(String.format("Entering recommend rewardSummary service -  RewardSummary Id:%s", claimRewardsCommand.getCourseId()));
 
-        RewardSummary rewardSummary = rewardDynamoRepository.findBy(recommendCommand.getCourseId());
+        RewardSummary rewardSummary = rewardRepository.findBy(claimRewardsCommand.getCourseId());
         if (rewardSummary != null) {
             Integer recommendationsCount = rewardSummary.getRecommendations();
             recommendationsCount += 1;
             rewardSummary.setRecommendations(recommendationsCount);
 
-            rewardSummary.setUpdatedOn(recommendCommand.getExecOn());
-            rewardSummary.setUpdatedBy(recommendCommand.getExecBy().getUserId());
+            rewardSummary.setUpdatedOn(claimRewardsCommand.getExecOn());
+            rewardSummary.setUpdatedBy(claimRewardsCommand.getExecBy().getUserId());
 
-            rewardDynamoRepository.save(rewardSummary);
+            rewardRepository.save(rewardSummary);
         }
     }
 
@@ -101,13 +100,13 @@ public class RewardServiceImpl implements RewardService {
 
         log.info(String.format("Entering disable topic service - Module Code:%s", disableCommand.getCode()));
 
-        rewardDynamoRepository.findBy(disableCommand.getCode());
-        Module topic = rewardDynamoRepository.findBy(disableCommand.getCode());
+        rewardRepository.findBy(disableCommand.getCode());
+        Module topic = rewardRepository.findBy(disableCommand.getCode());
         if (topic != null) {
             topic.setStatus("INACTIVE");
             topic.setUpdatedOn(disableCommand.getExecOn());
             topic.setUpdatedBy(disableCommand.getExecBy().getUserId());
-            rewardDynamoRepository.save(topic);
+            rewardRepository.save(topic);
         }
     }*/
 
@@ -116,7 +115,7 @@ public class RewardServiceImpl implements RewardService {
 
         log.info("Entering findAll RewardSummary service");
 
-        return rewardDynamoRepository.findAll();
+        return rewardRepository.findAll();
     }
 
     @Override
@@ -124,7 +123,7 @@ public class RewardServiceImpl implements RewardService {
 
         log.info(String.format("Entering findAllByTopicCode RewardSummary service - Module code:%s", topicCode));
 
-        return rewardDynamoRepository.findAllByTopicCode(topicCode);
+        return rewardRepository.findAllByTopicCode(topicCode);
     }
 
 

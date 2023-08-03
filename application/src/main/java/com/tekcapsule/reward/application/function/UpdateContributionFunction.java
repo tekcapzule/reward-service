@@ -6,9 +6,9 @@ import com.tekcapsule.core.utils.HeaderUtil;
 import com.tekcapsule.core.utils.Outcome;
 import com.tekcapsule.core.utils.PayloadUtil;
 import com.tekcapsule.core.utils.Stage;
-import com.tekcapsule.reward.application.function.input.UpdateInput;
+import com.tekcapsule.reward.application.function.input.UpdateContributionInput;
 import com.tekcapsule.reward.application.mapper.InputOutputMapper;
-import com.tekcapsule.reward.domain.command.UpdateCommand;
+import com.tekcapsule.reward.domain.command.UpdateContributionCommand;
 import com.tekcapsule.reward.domain.service.RewardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
@@ -21,30 +21,30 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class UpdateFunction implements Function<Message<UpdateInput>, Message<Void>> {
+public class UpdateContributionFunction implements Function<Message<UpdateContributionInput>, Message<Void>> {
 
     private final RewardService rewardService;
 
     private final AppConfig appConfig;
 
-    public UpdateFunction(final RewardService rewardService, final AppConfig appConfig) {
+    public UpdateContributionFunction(final RewardService rewardService, final AppConfig appConfig) {
         this.rewardService = rewardService;
         this.appConfig = appConfig;
     }
 
     @Override
-    public Message<Void> apply(Message<UpdateInput> updateInputMessage) {
+    public Message<Void> apply(Message<UpdateContributionInput> updateInputMessage) {
 
         Map<String, Object> responseHeaders = new HashMap<>();
         Map<String, Object> payload = new HashMap<>();
         String stage = appConfig.getStage().toUpperCase();
 
         try {
-            UpdateInput updateInput = updateInputMessage.getPayload();
-            log.info(String.format("Entering update course Function - Module Code:%s", updateInput.getTopicCode()));
+            UpdateContributionInput updateContributionInput = updateInputMessage.getPayload();
+            log.info(String.format("Entering update course Function - Module Code:%s", updateContributionInput.getTopicCode()));
             Origin origin = HeaderUtil.buildOriginFromHeaders(updateInputMessage.getHeaders());
-            UpdateCommand updateCommand = InputOutputMapper.buildUpdateCommandFromUpdateInput.apply(updateInput, origin);
-            rewardService.update(updateCommand);
+            UpdateContributionCommand updateContributionCommand = InputOutputMapper.buildUpdateCommandFromUpdateInput.apply(updateContributionInput, origin);
+            rewardService.update(updateContributionCommand);
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
             payload = PayloadUtil.composePayload(Outcome.SUCCESS);
         } catch (Exception ex) {

@@ -14,8 +14,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RewardSummary extends BaseDomainEntity implements AggregateRoot {
-    @DynamoDBHashKey(attributeName="rewardSummaryId")
-    private String rewardSummaryId;
+    @DynamoDBHashKey(attributeName="rewardId")
+    private String rewardId;
     @DynamoDBAttribute(attributeName = "userId")
     private String userId;
     @DynamoDBAttribute(attributeName = "userName")

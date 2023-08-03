@@ -14,13 +14,13 @@ import java.util.List;
 
 @Slf4j
 @Repository
-public class RewardRepositoryImpl implements RewardDynamoRepository {
+public class RewardDynamoRepositoryImpl implements RewardRepository {
 
     private DynamoDBMapper dynamo;
     public static final String ACTIVE_STATUS = "ACTIVE";
 
     @Autowired
-    public RewardRepositoryImpl(DynamoDBMapper dynamo) {
+    public RewardDynamoRepositoryImpl(DynamoDBMapper dynamo) {
         this.dynamo = dynamo;
     }
 

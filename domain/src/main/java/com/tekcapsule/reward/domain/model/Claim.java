@@ -14,8 +14,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Claim extends BaseDomainEntity implements AggregateRoot {
-    @DynamoDBHashKey(attributeName="claimId")
-    private String claimId;
+    @DynamoDBHashKey(attributeName="rewardId")
+    private String rewardId;
     @DynamoDBAttribute(attributeName = "userId")
     private String userId;
     @DynamoDBAttribute(attributeName = "claimedPoints")

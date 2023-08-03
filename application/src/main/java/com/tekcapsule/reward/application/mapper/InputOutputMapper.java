@@ -1,14 +1,14 @@
 package com.tekcapsule.reward.application.mapper;
 
-import com.tekcapsule.reward.application.function.input.CreateInput;
-import com.tekcapsule.reward.application.function.input.RecommendInput;
-import com.tekcapsule.reward.application.function.input.UpdateInput;
+import com.tekcapsule.reward.application.function.input.CreateContributionInput;
+import com.tekcapsule.reward.application.function.input.ApproveContributionInput;
+import com.tekcapsule.reward.application.function.input.UpdateContributionInput;
 import com.tekcapsule.core.domain.Command;
 import com.tekcapsule.core.domain.ExecBy;
 import com.tekcapsule.core.domain.Origin;
-import com.tekcapsule.reward.domain.command.CreateCommand;
-import com.tekcapsule.reward.domain.command.RecommendCommand;
-import com.tekcapsule.reward.domain.command.UpdateCommand;
+import com.tekcapsule.reward.domain.command.CreateContributionCommand;
+import com.tekcapsule.reward.domain.command.ClaimRewardsCommand;
+import com.tekcapsule.reward.domain.command.UpdateContributionCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
@@ -30,25 +30,25 @@ public final class InputOutputMapper {
         return command;
     };
 
-    public static final BiFunction<CreateInput, Origin, CreateCommand> buildCreateCommandFromCreateInput = (createInput, origin) -> {
-        CreateCommand createCommand =  CreateCommand.builder().build();
-        BeanUtils.copyProperties(createInput, createCommand);
-        addOrigin.apply(createCommand, origin);
-        return createCommand;
+    public static final BiFunction<CreateContributionInput, Origin, CreateContributionCommand> buildCreateCommandFromCreateInput = (createContributionInput, origin) -> {
+        CreateContributionCommand createContributionCommand =  CreateContributionCommand.builder().build();
+        BeanUtils.copyProperties(createContributionInput, createContributionCommand);
+        addOrigin.apply(createContributionCommand, origin);
+        return createContributionCommand;
     };
 
-    public static final BiFunction<UpdateInput, Origin, UpdateCommand> buildUpdateCommandFromUpdateInput = (updateInput, origin) -> {
-        UpdateCommand updateCommand = UpdateCommand.builder().build();
-        BeanUtils.copyProperties(updateInput, updateCommand);
-        addOrigin.apply(updateCommand, origin);
-        return updateCommand;
+    public static final BiFunction<UpdateContributionInput, Origin, UpdateContributionCommand> buildUpdateCommandFromUpdateInput = (updateContributionInput, origin) -> {
+        UpdateContributionCommand updateContributionCommand = UpdateContributionCommand.builder().build();
+        BeanUtils.copyProperties(updateContributionInput, updateContributionCommand);
+        addOrigin.apply(updateContributionCommand, origin);
+        return updateContributionCommand;
     };
 
-    public static final BiFunction<RecommendInput, Origin, RecommendCommand> buildRecommendCommandFromRecommendInput = (recommendInput, origin) -> {
-        RecommendCommand recommendCommand =  RecommendCommand.builder().build();
-        BeanUtils.copyProperties(recommendInput, recommendCommand);
-        addOrigin.apply(recommendCommand, origin);
-        return recommendCommand;
+    public static final BiFunction<ApproveContributionInput, Origin, ClaimRewardsCommand> buildRecommendCommandFromRecommendInput = (approveContributionInput, origin) -> {
+        ClaimRewardsCommand claimRewardsCommand =  ClaimRewardsCommand.builder().build();
+        BeanUtils.copyProperties(approveContributionInput, claimRewardsCommand);
+        addOrigin.apply(claimRewardsCommand, origin);
+        return claimRewardsCommand;
     };
 
 }

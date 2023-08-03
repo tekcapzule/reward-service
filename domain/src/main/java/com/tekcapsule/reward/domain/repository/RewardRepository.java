@@ -5,7 +5,7 @@ import com.tekcapsule.core.domain.CrudRepository;
 
 import java.util.List;
 
-public interface RewardDynamoRepository extends CrudRepository<RewardSummary, String> {
+public interface RewardRepository extends CrudRepository<RewardSummary, String> {
 
     List<RewardSummary> findAllByTopicCode(String topicCode);
 }

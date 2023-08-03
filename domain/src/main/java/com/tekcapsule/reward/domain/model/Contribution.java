@@ -13,8 +13,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Contribution extends BaseDomainEntity implements AggregateRoot {
-    @DynamoDBHashKey(attributeName = "contributionId")
-    private String contributionId;
+    @DynamoDBHashKey(attributeName = "rewardId")
+    private String rewardId;
     @DynamoDBAttribute(attributeName = "userId")
     private String userId;
     @DynamoDBAttribute(attributeName = "title")

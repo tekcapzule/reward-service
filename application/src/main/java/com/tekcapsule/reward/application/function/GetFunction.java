@@ -4,7 +4,7 @@ import com.tekcapsule.reward.application.config.AppConfig;
 import com.tekcapsule.core.utils.HeaderUtil;
 import com.tekcapsule.core.utils.Outcome;
 import com.tekcapsule.core.utils.Stage;
-import com.tekcapsule.reward.application.function.input.GetInput;
+import com.tekcapsule.reward.application.function.input.GetContributionsInput;
 import com.tekcapsule.reward.domain.model.RewardSummary;
 import com.tekcapsule.reward.domain.service.RewardService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GetFunction implements Function<Message<GetInput>, Message<List<RewardSummary>>> {
+public class GetFunction implements Function<Message<GetContributionsInput>, Message<List<RewardSummary>>> {
 
     private final RewardService rewardService;
 
@@ -33,7 +33,7 @@ public class GetFunction implements Function<Message<GetInput>, Message<List<Rew
 
 
     @Override
-    public Message<List<RewardSummary>> apply(Message<GetInput> getInputMessage) {
+    public Message<List<RewardSummary>> apply(Message<GetContributionsInput> getInputMessage) {
 
         Map<String, Object> responseHeaders = new HashMap<>();
         List<RewardSummary> cours = new ArrayList<>();
@@ -41,9 +41,9 @@ public class GetFunction implements Function<Message<GetInput>, Message<List<Rew
         String stage = appConfig.getStage().toUpperCase();
 
         try {
-            GetInput getInput = getInputMessage.getPayload();
-            log.info(String.format("Entering get course Function -Module Code:%s", getInput.getTopicCode()));
-            cours = rewardService.findAllByTopicCode(getInput.getTopicCode());
+            GetContributionsInput getContributionsInput = getInputMessage.getPayload();
+            log.info(String.format("Entering get course Function -Module Code:%s", getContributionsInput.getTopicCode()));
+            cours = rewardService.findAllByTopicCode(getContributionsInput.getTopicCode());
             if (cours.isEmpty()) {
                 responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.NOT_FOUND);
             } else {

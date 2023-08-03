@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
-public class RecommendInput {
-    private String courseId;
+public class ApproveContributionInput {
+    private String contributionId;
 }
