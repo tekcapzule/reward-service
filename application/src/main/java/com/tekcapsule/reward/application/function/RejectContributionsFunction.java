@@ -22,13 +22,13 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class RecommendFunction implements Function<Message<ApproveContributionInput>, Message<Void>> {
+public class RejectContributionsFunction implements Function<Message<ApproveContributionInput>, Message<Void>> {
 
     private final RewardService rewardService;
 
     private final AppConfig appConfig;
 
-    public RecommendFunction(final RewardService rewardService, final AppConfig appConfig) {
+    public RejectContributionsFunction(final RewardService rewardService, final AppConfig appConfig) {
         this.rewardService = rewardService;
         this.appConfig = appConfig;
     }

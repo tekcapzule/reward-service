@@ -20,13 +20,13 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GetFunction implements Function<Message<GetContributionsInput>, Message<List<RewardSummary>>> {
+public class GetContributionsFunction implements Function<Message<GetContributionsInput>, Message<List<RewardSummary>>> {
 
     private final RewardService rewardService;
 
     private final AppConfig appConfig;
 
-    public GetFunction(final RewardService rewardService, final AppConfig appConfig) {
+    public GetContributionsFunction(final RewardService rewardService, final AppConfig appConfig) {
         this.rewardService = rewardService;
         this.appConfig = appConfig;
     }

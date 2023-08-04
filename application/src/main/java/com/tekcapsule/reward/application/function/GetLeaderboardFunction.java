@@ -17,13 +17,13 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GetAllFunction implements Function<Message<EmptyFunctionInput>, Message<List<RewardSummary>>> {
+public class GetLeaderboardFunction implements Function<Message<EmptyFunctionInput>, Message<List<RewardSummary>>> {
 
     private final RewardService rewardService;
 
     private final AppConfig appConfig;
 
-    public GetAllFunction(final RewardService rewardService, final AppConfig appConfig) {
+    public GetLeaderboardFunction(final RewardService rewardService, final AppConfig appConfig) {
         this.rewardService = rewardService;
         this.appConfig = appConfig;
     }
