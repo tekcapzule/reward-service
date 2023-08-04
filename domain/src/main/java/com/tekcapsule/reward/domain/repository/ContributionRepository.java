@@ -1,4 +1,7 @@
 package com.tekcapsule.reward.domain.repository;
 
-public interface ContributionRepository {
+import com.tekcapsule.core.domain.CrudRepository;
+import com.tekcapsule.reward.domain.model.Contribution;
+
+public interface ContributionRepository extends CrudRepository<Contribution, String> {
 }

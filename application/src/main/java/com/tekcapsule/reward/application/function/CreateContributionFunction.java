@@ -43,7 +43,7 @@ public class CreateContributionFunction implements Function<Message<CreateContri
             CreateContributionInput createContributionInput = createInputMessage.getPayload();
             log.info(String.format("Entering create course Function - Module Code:%s", createContributionInput.getTopicCode()));
             Origin origin = HeaderUtil.buildOriginFromHeaders(createInputMessage.getHeaders());
-            CreateContributionCommand createContributionCommand = InputOutputMapper.buildCreateCommandFromCreateInput.apply(createContributionInput, origin);
+            CreateContributionCommand createContributionCommand = InputOutputMapper.buildApproveContributionCommandFromApproveContributionInput.apply(createContributionInput, origin);
             rewardService.create(createContributionCommand);
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
             payload = PayloadUtil.composePayload(Outcome.SUCCESS);

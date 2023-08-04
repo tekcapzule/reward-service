@@ -43,7 +43,7 @@ public class UpdateContributionFunction implements Function<Message<UpdateContri
             UpdateContributionInput updateContributionInput = updateInputMessage.getPayload();
             log.info(String.format("Entering update course Function - Module Code:%s", updateContributionInput.getTopicCode()));
             Origin origin = HeaderUtil.buildOriginFromHeaders(updateInputMessage.getHeaders());
-            UpdateContributionCommand updateContributionCommand = InputOutputMapper.buildUpdateCommandFromUpdateInput.apply(updateContributionInput, origin);
+            UpdateContributionCommand updateContributionCommand = InputOutputMapper.buildUpdateContributionCommandFromUpdateContributionInput.apply(updateContributionInput, origin);
             rewardService.update(updateContributionCommand);
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
             payload = PayloadUtil.composePayload(Outcome.SUCCESS);

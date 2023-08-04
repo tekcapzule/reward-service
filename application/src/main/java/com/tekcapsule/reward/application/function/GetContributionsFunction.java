@@ -42,8 +42,8 @@ public class GetContributionsFunction implements Function<Message<GetContributio
 
         try {
             GetContributionsInput getContributionsInput = getInputMessage.getPayload();
-            log.info(String.format("Entering get course Function -Module Code:%s", getContributionsInput.getTopicCode()));
-            cours = rewardService.findAllByTopicCode(getContributionsInput.getTopicCode());
+            log.info(String.format("Entering get course Function -Module Code:%s", getContributionsInput.getUserId()));
+            cours = rewardService.findAllByTopicCode(getContributionsInput.getUserId());
             if (cours.isEmpty()) {
                 responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.NOT_FOUND);
             } else {

@@ -41,9 +41,9 @@ public class RejectContributionsFunction implements Function<Message<ApproveCont
         String stage = appConfig.getStage().toUpperCase();
         try {
             ApproveContributionInput approveContributionInput = recommendInputMessage.getPayload();
-            log.info(String.format("Entering recommend course Function -  RewardSummary Id:%s", approveContributionInput.getCourseId()));
+            log.info(String.format("Entering recommend course Function -  RewardSummary Id:%s", approveContributionInput.getContributionId()));
             Origin origin = HeaderUtil.buildOriginFromHeaders(recommendInputMessage.getHeaders());
-            ClaimRewardsCommand claimRewardsCommand = InputOutputMapper.buildRecommendCommandFromRecommendInput.apply(approveContributionInput, origin);
+            ClaimRewardsCommand claimRewardsCommand = InputOutputMapper.buildRejectContributionCommandFromRejectContributionInput.apply(approveContributionInput, origin);
             rewardService.recommend(claimRewardsCommand);
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
             payload = PayloadUtil.composePayload(Outcome.SUCCESS);
