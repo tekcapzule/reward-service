@@ -6,8 +6,9 @@ import com.tekcapsule.core.utils.HeaderUtil;
 import com.tekcapsule.core.utils.Outcome;
 import com.tekcapsule.core.utils.PayloadUtil;
 import com.tekcapsule.core.utils.Stage;
-import com.tekcapsule.reward.application.function.input.AwardPointsInput;
+import com.tekcapsule.reward.application.function.input.RedeemPointsInput;
 import com.tekcapsule.reward.application.mapper.InputOutputMapper;
+import com.tekcapsule.reward.domain.command.RedeemPointsCommand;
 import com.tekcapsule.reward.domain.service.RewardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
@@ -20,7 +21,7 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class RedeemPointsFunction implements Function<Message<AwardPointsInput>, Message<Void>> {
+public class RedeemPointsFunction implements Function<Message<RedeemPointsInput>, Message<Void>> {
 
     private final RewardService rewardService;
 
@@ -32,18 +33,18 @@ public class RedeemPointsFunction implements Function<Message<AwardPointsInput>,
     }
 
     @Override
-    public Message<Void> apply(Message<AwardPointsInput> createInputMessage) {
+    public Message<Void> apply(Message<RedeemPointsInput> redeemPointsInputMessage) {
 
         Map<String, Object> responseHeaders = new HashMap<>();
         Map<String, Object> payload = new HashMap<>();
         String stage = appConfig.getStage().toUpperCase();
 
         try {
-            AwardPointsInput awardPointsInput = createInputMessage.getPayload();
-            log.info(String.format("Entering create course Function - Module Code:%s", awardPointsInput.getTopicCode()));
-            Origin origin = HeaderUtil.buildOriginFromHeaders(createInputMessage.getHeaders());
-            CreateContributionCommand createContributionCommand = InputOutputMapper.buildApproveContributionCommandFromApproveContributionInput.apply(awardPointsInput, origin);
-            rewardService.create(createContributionCommand);
+            RedeemPointsInput redeemPointsInput = redeemPointsInputMessage.getPayload();
+            log.info(String.format("Entering redeem points Function - UserId :%s", redeemPointsInput.getUserId()));
+            Origin origin = HeaderUtil.buildOriginFromHeaders(redeemPointsInputMessage.getHeaders());
+            RedeemPointsCommand redeemPointsCommand = InputOutputMapper.buildRedeemPointsCommandFromRedeemPointsInput.apply(redeemPointsInput, origin);
+            rewardService.redeem(redeemPointsCommand);
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
             payload = PayloadUtil.composePayload(Outcome.SUCCESS);
         } catch (Exception ex) {

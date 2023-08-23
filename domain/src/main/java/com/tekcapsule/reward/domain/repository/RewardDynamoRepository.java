@@ -1,9 +1,7 @@
 package com.tekcapsule.reward.domain.repository;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.tekcapsule.reward.domain.model.Reward;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,25 +29,8 @@ public class RewardDynamoRepository implements RewardRepository {
     }
 
     @Override
-    public List<Reward> findAllByTopicCode(String topicCode) {
-
-        HashMap<String, AttributeValue> expAttributes = new HashMap<>();
-        expAttributes.put(":status", new AttributeValue().withS(ACTIVE_STATUS));
-        expAttributes.put(":topicCode", new AttributeValue().withS(topicCode));
-
-        HashMap<String, String> expNames = new HashMap<>();
-        expNames.put("#status", "status");
-        expNames.put("#topicCode", "topicCode");
-
-
-        DynamoDBQueryExpression<Reward> queryExpression = new DynamoDBQueryExpression<Reward>()
-                .withIndexName("topicGSI").withConsistentRead(false)
-                .withKeyConditionExpression("#status = :status and #topicCode = :topicCode")
-                .withExpressionAttributeValues(expAttributes)
-                .withExpressionAttributeNames(expNames);
-
-        return dynamo.query(Reward.class, queryExpression);
-
+    public List<Reward> findTopContributors() {
+        return dynamo.scan(Reward.class,new DynamoDBScanExpression());
     }
 
     @Override
@@ -62,4 +43,5 @@ public class RewardDynamoRepository implements RewardRepository {
         dynamo.save(reward);
         return reward;
     }
+
 }

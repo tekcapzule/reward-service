@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface RewardRepository extends CrudRepository<Reward, String> {
 
-    List<Reward> findAllByTopicCode(String topicCode);
+    List<Reward> findTopContributors();
 }

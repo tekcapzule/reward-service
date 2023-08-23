@@ -7,12 +7,10 @@ import java.util.List;
 
 
 public interface RewardService {
+    Reward findByUserId(String userId);
+    void award(AwardPointsCommand awardPointsCommand);
 
-    void create(AwardPointsCommand awardPointsCommand);
+    void redeem(RedeemPointsCommand redeemPointsCommand);
 
-    void update(UpdatePointsCommand updatePointsCommand);
-
-    List<Reward> findAll();
-
-    List<Reward> findAllByTopicCode(String code);
+    List<Reward> getLeaderboard();
 }

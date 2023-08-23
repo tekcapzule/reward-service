@@ -19,10 +19,11 @@ public class RewardServiceImpl implements RewardService {
         this.rewardRepository = rewardRepository;
     }
 
-    @Override
-    public void create(AwardPointsCommand awardPointsCommand) {
 
-        log.info(String.format("Entering create reward service - Module Code :%s", awardPointsCommand.getTopicCode()));
+    @Override
+    public void award(AwardPointsCommand awardPointsCommand) {
+
+        log.info(String.format("Entering award reward points service - userId :%s", awardPointsCommand.getUserId()));
         Reward reward = Reward.builder()
                 .status(Status.ACTIVE)
                 .build();
@@ -34,33 +35,28 @@ public class RewardServiceImpl implements RewardService {
     }
 
     @Override
-    public void update(UpdatePointsCommand updatePointsCommand) {
+    public void redeem(RedeemPointsCommand redeemPointsCommand) {
 
-        log.info(String.format("Entering update reward service - Reward ID:%s", updatePointsCommand.getTopicCode()));
+        log.info(String.format("Entering redeem reward points service - userId:%s", redeemPointsCommand.getUserId()));
 
-        Reward reward = rewardRepository.findBy(updatePointsCommand.getUserId());
+        Reward reward = rewardRepository.findBy(redeemPointsCommand.getUserId());
         if (reward != null) {
-            reward.setUpdatedOn(updatePointsCommand.getExecOn());
-            reward.setUpdatedBy(updatePointsCommand.getExecBy().getUserId());
+            reward.setUpdatedOn(redeemPointsCommand.getExecOn());
+            reward.setUpdatedBy(redeemPointsCommand.getExecBy().getUserId());
             rewardRepository.save(reward);
         }
     }
 
     @Override
-    public List<Reward> findAll() {
-
-        log.info("Entering findAll Reward service");
-
-        return rewardRepository.findAll();
+    public Reward findByUserId(String userId) {
+        log.info("Entering findByUserId Reward service");
+        return rewardRepository.findBy(userId);
     }
 
     @Override
-    public List<Reward> findAllByTopicCode(String topicCode) {
-
-        log.info(String.format("Entering findAllByTopicCode Reward service - Module code:%s", topicCode));
-
-        return rewardRepository.findAllByTopicCode(topicCode);
+    public List<Reward> getLeaderboard() {
+        log.info("Entering getLeaderboard Reward service");
+        return rewardRepository.findTopContributors();
     }
-
 
 }

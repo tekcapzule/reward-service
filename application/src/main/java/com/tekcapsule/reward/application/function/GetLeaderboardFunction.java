@@ -33,16 +33,16 @@ public class GetLeaderboardFunction implements Function<Message<EmptyFunctionInp
     public Message<List<Reward>> apply(Message<EmptyFunctionInput> getAllInputMessage) {
 
         Map<String, Object> responseHeaders = new HashMap<>();
-        List<Reward> cours = new ArrayList<>();
+        List<Reward> rewards = new ArrayList<>();
         String stage = appConfig.getStage().toUpperCase();
         try {
-            log.info("Entering get all cours Function");
-            cours = rewardService.findAll();
+            log.info("Entering get leaderboard Function");
+            rewards = rewardService.getLeaderboard();
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.SUCCESS);
         } catch (Exception ex) {
             log.error(ex.getMessage());
             responseHeaders = HeaderUtil.populateResponseHeaders(responseHeaders, Stage.valueOf(stage), Outcome.ERROR);
         }
-        return new GenericMessage<>(cours, responseHeaders);
+        return new GenericMessage<>(rewards, responseHeaders);
     }
 }

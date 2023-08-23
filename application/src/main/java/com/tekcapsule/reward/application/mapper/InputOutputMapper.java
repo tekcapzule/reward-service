@@ -25,36 +25,16 @@ public final class InputOutputMapper {
         command.setExecOn(utc.toString());
         return command;
     };
-    public static final BiFunction<AwardPointsInput, Origin, CreateContributionCommand> buildCreateContributionCommandFromCreateContributionInput = (awardPointsInput, origin) -> {
-        CreateContributionCommand createContributionCommand = CreateContributionCommand.builder().build();
-        BeanUtils.copyProperties(awardPointsInput, createContributionCommand);
-        addOrigin.apply(createContributionCommand, origin);
-        return createContributionCommand;
+    public static final BiFunction<AwardPointsInput, Origin, AwardPointsCommand> buildAwardPointsCommandFromAwardPointsInput = (awardPointsInput, origin) -> {
+        AwardPointsCommand awardPointsCommand = AwardPointsCommand.builder().build();
+        BeanUtils.copyProperties(awardPointsInput, awardPointsCommand);
+        addOrigin.apply(awardPointsCommand, origin);
+        return awardPointsCommand;
     };
 
-    public static final BiFunction<UpdatePointsInput, Origin, UpdateContributionCommand> buildUpdateContributionCommandFromUpdateContributionInput = (updatePointsInput, origin) -> {
-        UpdateContributionCommand updateContributionCommand = UpdateContributionCommand.builder().build();
-        BeanUtils.copyProperties(updatePointsInput, updateContributionCommand);
-        addOrigin.apply(updateContributionCommand, origin);
-        return updateContributionCommand;
-    };
-
-    public static final BiFunction<ApproveContributionInput, Origin, ApproveContributionCommand> buildApproveContributionCommandFromApproveContributionInput = (approveContributionInput, origin) -> {
-        ApproveContributionCommand approveContributionCommand =  ApproveContributionCommand.builder().build();
-        BeanUtils.copyProperties(approveContributionInput, approveContributionCommand);
-        addOrigin.apply(approveContributionCommand, origin);
-        return approveContributionCommand;
-    };
-    public static final BiFunction<RejectContributionInput, Origin, RejectContributionCommand> buildRejectContributionCommandFromRejectContributionInput = (rejectContributionInput, origin) -> {
-        RejectContributionCommand rejectContributionCommand =  RejectContributionCommand.builder().build();
-        BeanUtils.copyProperties(rejectContributionInput, rejectContributionCommand);
-        addOrigin.apply(rejectContributionCommand, origin);
-        return rejectContributionCommand;
-    };
-
-    public static final BiFunction<RedeemPointsInput, Origin, RedeemPointsCommand> buildClaimRewardsCommandFromClaimRewardsInput = (claimPointsInput, origin) -> {
-        RedeemPointsCommand redeemPointsCommand =  RedeemPointsCommand.builder().build();
-        BeanUtils.copyProperties(claimPointsInput, redeemPointsCommand);
+    public static final BiFunction<RedeemPointsInput, Origin, RedeemPointsCommand> buildRedeemPointsCommandFromRedeemPointsInput = (redeemPointsInput, origin) -> {
+        RedeemPointsCommand redeemPointsCommand = RedeemPointsCommand.builder().build();
+        BeanUtils.copyProperties(redeemPointsCommand, redeemPointsCommand);
         addOrigin.apply(redeemPointsCommand, origin);
         return redeemPointsCommand;
     };
