@@ -6,6 +6,8 @@ import com.tekcapsule.core.domain.AggregateRoot;
 import com.tekcapsule.core.domain.BaseDomainEntity;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EqualsAndHashCode(callSuper = true)
@@ -13,19 +15,17 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RewardSummary extends BaseDomainEntity implements AggregateRoot {
-    @DynamoDBHashKey(attributeName="rewardId")
-    private String rewardId;
-    @DynamoDBAttribute(attributeName = "userId")
+public class Reward extends BaseDomainEntity implements AggregateRoot {
+    @DynamoDBHashKey(attributeName="userId")
     private String userId;
+    @DynamoDBRangeKey(attributeName="lifetimeRewardPoints")
+    private String lifetimeRewardPoints;
     @DynamoDBAttribute(attributeName = "userName")
     private String userName;
-    @DynamoDBAttribute(attributeName = "rewardPoints")
-    private String rewardPoints;
-    @DynamoDBAttribute(attributeName = "claimedPoints")
-    private String claimedPoints;
-    @DynamoDBAttribute(attributeName = "lastClaimOn")
-    private String summary;
+    @DynamoDBAttribute(attributeName = "currentBalance")
+    private Integer rewardPoints;
+    @DynamoDBAttribute(attributeName = "claims")
+    private List<Claim> claims;
     @DynamoDBAttribute(attributeName = "status")
     @DynamoDBTypeConvertedEnum
     private Status status;

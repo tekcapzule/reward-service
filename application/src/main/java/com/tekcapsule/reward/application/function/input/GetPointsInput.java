@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NoArgsConstructor
-public class RejectContributionInput {
-    private String contributionId;
+public class GetPointsInput {
+    private String userId;
 }

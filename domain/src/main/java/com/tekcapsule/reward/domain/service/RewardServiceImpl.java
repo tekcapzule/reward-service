@@ -1,7 +1,7 @@
 package com.tekcapsule.reward.domain.service;
 
 import com.tekcapsule.reward.domain.command.*;
-import com.tekcapsule.reward.domain.model.RewardSummary;
+import com.tekcapsule.reward.domain.model.Reward;
 import com.tekcapsule.reward.domain.model.Status;
 import com.tekcapsule.reward.domain.repository.RewardRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,44 +20,44 @@ public class RewardServiceImpl implements RewardService {
     }
 
     @Override
-    public void create(CreateRewardSummary createRewardSummary) {
+    public void create(AwardPointsCommand awardPointsCommand) {
 
-        log.info(String.format("Entering create rewardSummary service - Module Code :%s", createRewardSummary.getTopicCode()));
-        RewardSummary rewardSummary = RewardSummary.builder()
+        log.info(String.format("Entering create reward service - Module Code :%s", awardPointsCommand.getTopicCode()));
+        Reward reward = Reward.builder()
                 .status(Status.ACTIVE)
                 .build();
 
-        rewardSummary.setAddedOn(createRewardSummary.getExecOn());
-        rewardSummary.setAddedBy(createRewardSummary.getExecBy().getUserId());
+        reward.setAddedOn(awardPointsCommand.getExecOn());
+        reward.setAddedBy(awardPointsCommand.getExecBy().getUserId());
 
-        rewardRepository.save(rewardSummary);
+        rewardRepository.save(reward);
     }
 
     @Override
-    public void update(UpdateRewardSummaryCommand updateRewardSummaryCommand) {
+    public void update(UpdatePointsCommand updatePointsCommand) {
 
-        log.info(String.format("Entering update rewardSummary service - RewardSummary ID:%s", updateRewardSummaryCommand.getTopicCode()));
+        log.info(String.format("Entering update reward service - Reward ID:%s", updatePointsCommand.getTopicCode()));
 
-        RewardSummary rewardSummary = rewardRepository.findBy(updateRewardSummaryCommand.getUserId());
-        if (rewardSummary != null) {
-            rewardSummary.setUpdatedOn(updateRewardSummaryCommand.getExecOn());
-            rewardSummary.setUpdatedBy(updateRewardSummaryCommand.getExecBy().getUserId());
-            rewardRepository.save(rewardSummary);
+        Reward reward = rewardRepository.findBy(updatePointsCommand.getUserId());
+        if (reward != null) {
+            reward.setUpdatedOn(updatePointsCommand.getExecOn());
+            reward.setUpdatedBy(updatePointsCommand.getExecBy().getUserId());
+            rewardRepository.save(reward);
         }
     }
 
     @Override
-    public List<RewardSummary> findAll() {
+    public List<Reward> findAll() {
 
-        log.info("Entering findAll RewardSummary service");
+        log.info("Entering findAll Reward service");
 
         return rewardRepository.findAll();
     }
 
     @Override
-    public List<RewardSummary> findAllByTopicCode(String topicCode) {
+    public List<Reward> findAllByTopicCode(String topicCode) {
 
-        log.info(String.format("Entering findAllByTopicCode RewardSummary service - Module code:%s", topicCode));
+        log.info(String.format("Entering findAllByTopicCode Reward service - Module code:%s", topicCode));
 
         return rewardRepository.findAllByTopicCode(topicCode);
     }

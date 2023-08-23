@@ -5,7 +5,7 @@ import com.tekcapsule.core.domain.EmptyFunctionInput;
 import com.tekcapsule.core.utils.HeaderUtil;
 import com.tekcapsule.core.utils.Outcome;
 import com.tekcapsule.core.utils.Stage;
-import com.tekcapsule.reward.domain.model.RewardSummary;
+import com.tekcapsule.reward.domain.model.Reward;
 import com.tekcapsule.reward.domain.service.RewardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.Message;
@@ -17,7 +17,7 @@ import java.util.function.Function;
 
 @Component
 @Slf4j
-public class GetLeaderboardFunction implements Function<Message<EmptyFunctionInput>, Message<List<RewardSummary>>> {
+public class GetLeaderboardFunction implements Function<Message<EmptyFunctionInput>, Message<List<Reward>>> {
 
     private final RewardService rewardService;
 
@@ -30,10 +30,10 @@ public class GetLeaderboardFunction implements Function<Message<EmptyFunctionInp
 
 
     @Override
-    public Message<List<RewardSummary>> apply(Message<EmptyFunctionInput> getAllInputMessage) {
+    public Message<List<Reward>> apply(Message<EmptyFunctionInput> getAllInputMessage) {
 
         Map<String, Object> responseHeaders = new HashMap<>();
-        List<RewardSummary> cours = new ArrayList<>();
+        List<Reward> cours = new ArrayList<>();
         String stage = appConfig.getStage().toUpperCase();
         try {
             log.info("Entering get all cours Function");

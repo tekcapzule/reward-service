@@ -25,16 +25,16 @@ public final class InputOutputMapper {
         command.setExecOn(utc.toString());
         return command;
     };
-    public static final BiFunction<CreateContributionInput, Origin, CreateContributionCommand> buildCreateContributionCommandFromCreateContributionInput = (createContributionInput, origin) -> {
+    public static final BiFunction<AwardPointsInput, Origin, CreateContributionCommand> buildCreateContributionCommandFromCreateContributionInput = (awardPointsInput, origin) -> {
         CreateContributionCommand createContributionCommand = CreateContributionCommand.builder().build();
-        BeanUtils.copyProperties(createContributionInput, createContributionCommand);
+        BeanUtils.copyProperties(awardPointsInput, createContributionCommand);
         addOrigin.apply(createContributionCommand, origin);
         return createContributionCommand;
     };
 
-    public static final BiFunction<UpdateContributionInput, Origin, UpdateContributionCommand> buildUpdateContributionCommandFromUpdateContributionInput = (updateContributionInput, origin) -> {
+    public static final BiFunction<UpdatePointsInput, Origin, UpdateContributionCommand> buildUpdateContributionCommandFromUpdateContributionInput = (updatePointsInput, origin) -> {
         UpdateContributionCommand updateContributionCommand = UpdateContributionCommand.builder().build();
-        BeanUtils.copyProperties(updateContributionInput, updateContributionCommand);
+        BeanUtils.copyProperties(updatePointsInput, updateContributionCommand);
         addOrigin.apply(updateContributionCommand, origin);
         return updateContributionCommand;
     };
@@ -52,10 +52,10 @@ public final class InputOutputMapper {
         return rejectContributionCommand;
     };
 
-    public static final BiFunction<ClaimRewardsInput, Origin, ClaimRewardsCommand> buildClaimRewardsCommandFromClaimRewardsInput = (claimRewardsInput, origin) -> {
-        ClaimRewardsCommand claimRewardsCommand =  ClaimRewardsCommand.builder().build();
-        BeanUtils.copyProperties(claimRewardsInput, claimRewardsCommand);
-        addOrigin.apply(claimRewardsCommand, origin);
-        return claimRewardsCommand;
+    public static final BiFunction<RedeemPointsInput, Origin, RedeemPointsCommand> buildClaimRewardsCommandFromClaimRewardsInput = (claimPointsInput, origin) -> {
+        RedeemPointsCommand redeemPointsCommand =  RedeemPointsCommand.builder().build();
+        BeanUtils.copyProperties(claimPointsInput, redeemPointsCommand);
+        addOrigin.apply(redeemPointsCommand, origin);
+        return redeemPointsCommand;
     };
 }

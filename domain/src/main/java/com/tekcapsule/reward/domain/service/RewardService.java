@@ -1,18 +1,18 @@
 package com.tekcapsule.reward.domain.service;
 
 import com.tekcapsule.reward.domain.command.*;
-import com.tekcapsule.reward.domain.model.RewardSummary;
+import com.tekcapsule.reward.domain.model.Reward;
 
 import java.util.List;
 
 
 public interface RewardService {
 
-    void create(CreateRewardSummary createRewardSummary);
+    void create(AwardPointsCommand awardPointsCommand);
 
-    void update(UpdateRewardSummaryCommand updateRewardSummaryCommand);
+    void update(UpdatePointsCommand updatePointsCommand);
 
-    List<RewardSummary> findAll();
+    List<Reward> findAll();
 
-    List<RewardSummary> findAllByTopicCode(String code);
+    List<Reward> findAllByTopicCode(String code);
 }
