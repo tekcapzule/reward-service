@@ -27,7 +27,7 @@ Globals:
         TABLE: !Ref RewardTable
         APPLICATION_ENVIRONMENT: !Ref Stage
         CLOUD_REGION: us-east-1
-        MAIN_CLASS: com.tekcapsule.reward.application.RewardApplication
+        MAIN_CLASS: com.tekcapzule.reward.application.RewardApplication
         JAVA_TOOL_OPTIONS: -XX:+TieredCompilation -XX:TieredStopAtLevel=1
 
 Resources:

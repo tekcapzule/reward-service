@@ -3,14 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tekcapsule</groupId>
+    <groupId>com.tekcapzule</groupId>
     <artifactId>reward-application</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>pom</packaging>
     <name>Reward Application</name>
     <description>Reward Application</description>
     <properties>
-        <sonar.organization>tekcapsule</sonar.organization>
+        <sonar.organization>tekcapzule</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <modules>
@@ -30,8 +30,8 @@
     <distributionManagement>
         <repository>
             <id>reward</id>
-            <name>GitHub TekCapsule Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/tekcapsule/reward-service</url>
+            <name>GitHub TekCapzule Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/tekcapzule/reward-service</url>
         </repository>
     </distributionManagement>
 </project>
